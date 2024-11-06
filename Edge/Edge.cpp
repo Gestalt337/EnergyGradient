@@ -88,7 +88,7 @@ bool Edge::checkH() {
     return true;
 }
 
-Vertex * Edge::otherVertex(Vertex * v0) {
+Vertex * Edge::otherVertex(Vertex * v0) const {
     if (v0 == vertices_[0]) {
         return vertices_[1];
     } else if (v0 == vertices_[1]) {

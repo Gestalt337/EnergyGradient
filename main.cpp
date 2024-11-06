@@ -80,6 +80,7 @@ int main()
     cout<< "Current Energy "<<container.energy_<<endl;
     dumpVtk(container);
     container.updateCell();
+    container.updateEdges();
     while (container.ITERS_<MAX_ITER) {
         container.computeForce();
         container.updateEnergy();
@@ -90,6 +91,7 @@ int main()
             dumpVtk(container);
         }
         container.updateCell();
+        container.updateEdges();
     }
 
     return 0;

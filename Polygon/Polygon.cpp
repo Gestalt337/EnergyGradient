@@ -33,13 +33,19 @@ int Polygon::addBox(Box *box) {
 }
 
 int Polygon::checkBoundary() {
-    int np = static_cast<int>(vertices_.size());
-    for (int i=0; i<np;++i) {
-        double dx = fabs(vertices_[i]->pos_[0]-vertices_[(i+1)%np]->pos_[0]);
-        double dy = fabs(vertices_[i]->pos_[1]-vertices_[(i+1)%np]->pos_[1]);
-        double dz = fabs(vertices_[i]->pos_[2]-vertices_[(i+1)%np]->pos_[2]);
-        if (dx>0.5*box_->boxSize_[0]||dy>0.5*box_->boxSize_[1]||dz>0.5*box_->boxSize_[2]) {
+    // int np = static_cast<int>(vertices_.size());
+    // for (int i=0; i<np;++i) {
+    //     // double dx = fabs(vertices_[i]->pos_[0]-vertices_[(i+1)%np]->pos_[0]);
+    //     // double dy = fabs(vertices_[i]->pos_[1]-vertices_[(i+1)%np]->pos_[1]);
+    //     // double dz = fabs(vertices_[i]->pos_[2]-vertices_[(i+1)%np]->pos_[2]);
+    //     if (dx>0.5*box_->boxSize_[0]||dy>0.5*box_->boxSize_[1]||dz>0.5*box_->boxSize_[2]) {
+    //         crossBoundary_ = true;
+    //     }
+    // }
+    for (cedge& polyedges:edges_) {
+        if (polyedges.e->crossBoundary()) {
             crossBoundary_ = true;
+            break;
         }
     }
     return 0;

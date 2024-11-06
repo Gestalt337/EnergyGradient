@@ -54,7 +54,7 @@ public:
     int update();
     bool checkI();
     bool checkH();
-    Vertex * otherVertex(Vertex *);
+    Vertex * otherVertex(Vertex *) const;
     int addBox(Box*);
 };
 

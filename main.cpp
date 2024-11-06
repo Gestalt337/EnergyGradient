@@ -55,8 +55,8 @@ void dumpVtk(Run& run){
 
 int main()
 {
-    long MAX_ITER = 10000;
-    int SAVE_ITER = 50;
+    long MAX_ITER = 100;
+    int SAVE_ITER = 1;
     map<array<double,3>,array<bool,3>> boxMap = loadBox("../conf");
     auto it = boxMap.begin();
     Box simBox(it->first,it->second);
@@ -64,6 +64,7 @@ int main()
     double kv=param["kv"], v0=param["v0"], s0=param["s0"], dt=param["dt"];
     auto container=Run(kv, v0, s0, dt);
     container.addBox(&simBox);
+    container.updateEdges();
     container.computeCellCenters();
     container.computePolygonCenters();
     container.addPolygonCell();

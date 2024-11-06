@@ -4,10 +4,12 @@
 
 #include "Polygon.h"
 
+#include <iostream>
+
 int Polygon::getCenter() {
     double xs = 0., ys = 0., zs = 0.;
     int const ns = static_cast<int>(vertices_.size());
-    for (int i=1; i<ns; ++i) {
+    for (int i=1; i<ns; ++i) {// This cannot use edge, because of the diferent algorithm.
         xs += box_->resetDistance(vertices_[i]->pos_[0] - vertices_[0]->pos_[0],0);
         ys += box_->resetDistance(vertices_[i]->pos_[1] - vertices_[0]->pos_[1],1);
         zs += box_->resetDistance(vertices_[i]->pos_[2] - vertices_[0]->pos_[2],2);

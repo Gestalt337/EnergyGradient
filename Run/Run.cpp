@@ -153,6 +153,9 @@ int Run::addBox(Box *box) {
     for (Polygon& poly: polygons_) {
         poly.addBox(box);
     }
+    for (Edge& edge: edges_) {
+        edge.addBox(box);
+    }
     return 0;
 }
 
@@ -240,6 +243,23 @@ int Run::addVertices() {
     return 0;
 }
 
+int Run::addEdges() {
+    ifstream file("../data/edges.csv");
+    string line;
+    while (getline(file, line)) {
+        stringstream ss(line);
+        string value;
+        vector<string> row;
+        while (getline(ss, value, ',')) {
+            row.push_back(value);
+        }
+        const long int id = stol(row[0]);
+        auto vtx1 = getVertexPtr(1);
+        edges_.push_back(Edge({getVertexPtr(stoi(row[1])),getVertexPtr(stoi(row[2]))},id));
+    }
+    return 0;
+}
+
 int Run::addPolygonRun() {
     ifstream file("../data/polygons.csv");
     string line;
@@ -287,6 +307,22 @@ int Run::addPolygonCell() {
         else{
             for (const string& pid:row){
                 Polygon* p_add = getPolygonPtr(stoi(pid));
+                int np = static_cast<int>(p_add->vertices_.size());
+                int orientation;
+                vector<cedge> cedges{};
+                for (int i=0; i<np; ++i) {
+                    for (Edge& edge:edges_) {
+                        if (edge.vertices_[0]==p_add->vertices_[i] && edge.vertices_[1]==p_add->vertices_[(i+1)%np]) {
+                            cedges.push_back(cedge(1,&edge));
+                            break;
+                        }
+                        else if (edge.vertices_[0]==p_add->vertices_[(i+1)%np] && edge.vertices_[1]==p_add->vertices_[i]) {
+                            cedges.push_back(cedge(-1,&edge));
+                            break;
+                        }
+                    }
+                }
+                p_add->edges_ = std::move(cedges);
                 for (Vertex* v:p_add->vertices_) {
                 }
                 thecell->addPolygon(p_add);
@@ -298,6 +334,14 @@ int Run::addPolygonCell() {
     }
     return 0;
 }
+
+int Run::updateEdges() {
+    for (Edge& edge:edges_) {
+        edge.update();
+    }
+    return 0;
+}
+
 
 int Run::computeCellVA() {
     for (Cell& cell: cells_) {

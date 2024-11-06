@@ -15,4 +15,6 @@ add_executable(EnergyGradient main.cpp
         Run/Run.h
         conf
         loader/loader.h
-        loader/loader.cpp)
+        loader/loader.cpp
+        Edge/Edge.h
+        Edge/Edge.cpp)

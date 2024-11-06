@@ -85,6 +85,12 @@ build CMakeFiles/EnergyGradient.dir/loader/loader.cpp.o: CXX_COMPILER__EnergyGra
   OBJECT_DIR = CMakeFiles/EnergyGradient.dir
   OBJECT_FILE_DIR = CMakeFiles/EnergyGradient.dir/loader
 
+build CMakeFiles/EnergyGradient.dir/Edge/Edge.cpp.o: CXX_COMPILER__EnergyGradient_unscanned_Debug /home/haoyuan/Western/Cpp/EnergyGradient/Edge/Edge.cpp || cmake_object_order_depends_target_EnergyGradient
+  DEP_FILE = CMakeFiles/EnergyGradient.dir/Edge/Edge.cpp.o.d
+  FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/EnergyGradient.dir
+  OBJECT_FILE_DIR = CMakeFiles/EnergyGradient.dir/Edge
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target EnergyGradient
@@ -93,7 +99,7 @@ build CMakeFiles/EnergyGradient.dir/loader/loader.cpp.o: CXX_COMPILER__EnergyGra
 #############################################
 # Link the executable EnergyGradient
 
-build EnergyGradient: CXX_EXECUTABLE_LINKER__EnergyGradient_Debug CMakeFiles/EnergyGradient.dir/main.cpp.o CMakeFiles/EnergyGradient.dir/Polygon/Polygon.cpp.o CMakeFiles/EnergyGradient.dir/Run/Box.cpp.o CMakeFiles/EnergyGradient.dir/Cell/Cell.cpp.o CMakeFiles/EnergyGradient.dir/Run/Run.cpp.o CMakeFiles/EnergyGradient.dir/loader/loader.cpp.o
+build EnergyGradient: CXX_EXECUTABLE_LINKER__EnergyGradient_Debug CMakeFiles/EnergyGradient.dir/main.cpp.o CMakeFiles/EnergyGradient.dir/Polygon/Polygon.cpp.o CMakeFiles/EnergyGradient.dir/Run/Box.cpp.o CMakeFiles/EnergyGradient.dir/Cell/Cell.cpp.o CMakeFiles/EnergyGradient.dir/Run/Run.cpp.o CMakeFiles/EnergyGradient.dir/loader/loader.cpp.o CMakeFiles/EnergyGradient.dir/Edge/Edge.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/EnergyGradient.dir
   POST_BUILD = :

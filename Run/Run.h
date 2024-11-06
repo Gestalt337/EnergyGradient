@@ -13,6 +13,7 @@
 #include <array>
 
 #include "../Cell/Cell.h"
+#include "../Edge/Edge.h"
 
 
 class Run {
@@ -20,6 +21,7 @@ public:
     vector<Vertex> vertices_;
     vector<Cell> cells_;
     vector<Polygon> polygons_;
+    vector<Edge> edges_;
     long int ITERS_=0;
     double energy_=0;
     double kv_, s0_, v0_, dt_;
@@ -30,12 +32,14 @@ public:
         addVertices();
         addCells();
         addPolygonRun();
+        addEdges();
         //addPolygonCell();
         // compute_force();
         // update_energy();
     }
     int addBox(Box*);
     int addCells();
+    int addEdges();
     int addVertices();
     int addPolygonRun();
     int addPolygonCell();
@@ -47,6 +51,7 @@ public:
     int computeCellVA();
     int computeForce();
     int updateEnergy();
+    int updateEdges();
     int getVertexVelocity();
     int updateCell();
 

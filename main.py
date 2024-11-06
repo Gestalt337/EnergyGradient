@@ -288,6 +288,13 @@ def dumpTopo(vertices, edges, polygons, cells, points, Lxyz):
             for vertex in polygon.vertices_:
                 file.write(",{:d}".format(vertex.id_))
             file.write("\n")
+    with open("data/edges.csv","w") as file:
+        for key in edges:
+            edge = edges[key]
+            file.write("{:d}".format(edge.id_))
+            for vertex in edge.vertices_:
+                file.write(",{:d}".format(vertex.id_))
+            file.write("\n")
     with open("data/polygon.csv", "w") as file:
         for key in cells:
             s=''

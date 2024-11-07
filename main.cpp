@@ -55,8 +55,8 @@ void dumpVtk(Run& run){
 
 int main()
 {
-    long MAX_ITER = 100;
-    int SAVE_ITER = 1;
+    long MAX_ITER = 100000;
+    int SAVE_ITER = 50;
     map<array<double,3>,array<bool,3>> boxMap = loadBox("../conf");
     auto it = boxMap.begin();
     Box simBox(it->first,it->second);

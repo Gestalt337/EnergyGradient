@@ -77,3 +77,14 @@
 1213	1312	1730930939539923797	EnergyGradient	b5f3c8a4bb3563b9
 1	532	1730931402908642798	CMakeFiles/EnergyGradient.dir/Polygon/Polygon.cpp.o	2c24f39e2692df36
 532	614	1730931403439648463	EnergyGradient	b5f3c8a4bb3563b9
+1	764	1730949816499394502	CMakeFiles/EnergyGradient.dir/Polygon/Polygon.cpp.o	2c24f39e2692df36
+2	1111	1730949816500394516	CMakeFiles/EnergyGradient.dir/Cell/Cell.cpp.o	d24d74094b4e091f
+3	1142	1730949816501394530	CMakeFiles/EnergyGradient.dir/Edge/Edge.cpp.o	1dfbfdb0b9f34e93
+2	1321	1730949816500394516	CMakeFiles/EnergyGradient.dir/loader/loader.cpp.o	a8bbb2ab80023c85
+2	1564	1730949816500394516	CMakeFiles/EnergyGradient.dir/Run/Run.cpp.o	98dde6313f52e017
+1	1669	1730949816499394502	CMakeFiles/EnergyGradient.dir/main.cpp.o	848ff9a258214570
+1669	1776	1730949818167418115	EnergyGradient	b5f3c8a4bb3563b9
+1	1152	1730950161818285169	CMakeFiles/EnergyGradient.dir/main.cpp.o	848ff9a258214570
+1152	1228	1730950162969301477	EnergyGradient	b5f3c8a4bb3563b9
+2	1187	1730951332541524473	CMakeFiles/EnergyGradient.dir/Run/Run.cpp.o	98dde6313f52e017
+1188	1270	1730951333727540696	EnergyGradient	b5f3c8a4bb3563b9

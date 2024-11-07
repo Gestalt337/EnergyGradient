@@ -128,9 +128,15 @@ int Run::getVertexVelocity() {
 
 int Run::updateCell() {
     ITERS_ += 1;
-    for (Vertex & vertice : vertices_) {
+    for (Vertex & vertex : vertices_) {
         for (int m = 0; m < 3; m++) {
-            vertice.pos_[m] += vertice.velocity_[m]*dt_;
+            vertex.pos_[m] += vertex.velocity_[m]*dt_;
+            if (vertex.pos_[m]>box_->boxSize_[m] && box_->periodic_[m]) {
+                vertex.pos_[m] -= box_->boxSize_[m];
+            }
+            else if (vertex.pos_[m]<0 && box_->periodic_[m]) {
+                vertex.pos_[m] += box_->boxSize_[m];
+            }
         }
     }
     // Recalculate cell geometric.

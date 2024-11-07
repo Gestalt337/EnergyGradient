@@ -49,7 +49,7 @@ class Cell:
                 self.vertices_.append(polyvertices)
 
 def main():
-    Lx, Ly, Lz = (8, 8, 8)
+    Lx, Ly, Lz = (16, 16, 1)
     points = generatePoints(Lx, Ly, Lz)
     #points = [[0.5,0.5,0.5],[0.5,0.5,1.5],[1.5,0.5,0.5],[1.5,0.5,1.5],[0.5,1.5,0.5],[0.5,1.5,1.5],[1.5,1.5,0.5],[1.5,1.5,1.5]]
     #points = [[0.3,0.3,0.3],[0.7,0.7,0.7]]
@@ -57,7 +57,7 @@ def main():
         points,  # point positions
         [[0.0, Lx], [0.0, Ly], [0.0, Lz]],  # limits
         2.0,  # block size
-        periodic = [True, True, True]    # periodic boundary condition
+        periodic = [True, True, False]    # periodic boundary condition
     )
     vertices, edges, polygons, cells = topologyVoro(voroDict, (Lx, Ly, Lz))
     print("number of vertices:", len(vertices))
@@ -112,7 +112,7 @@ def topologyVoro(voroDict, Lxyz):
             if (Lx,Ly, Lz) != (1,1,1):
                 vPosition[0] = vPosition[0] %Lx
                 vPosition[1] = vPosition[1] %Ly
-                vPosition[2] = vPosition[2] %Lz
+                vPosition[2] = vPosition[2]
             else:
                 vPosition[0] = vPosition[0]
                 vPosition[1] = vPosition[1]
@@ -168,7 +168,8 @@ def generatePoints(Lx, Ly, Lz):
         point = []
         point.append(np.random.uniform(0, Lx))
         point.append(np.random.uniform(0, Ly))
-        point.append(np.random.uniform(0, Lz))
+        #point.append(np.random.uniform(0, Lz))
+        point.append(0.5)
         points.append(point)
 
     return points

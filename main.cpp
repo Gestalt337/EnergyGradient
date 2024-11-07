@@ -18,11 +18,11 @@ void dumpVtk(Run& run){
     int p_num = 0;
     string wrt;
     // Checking corss boundary polygons
-    for (Polygon& p:run.polygons_) {
-        if (run.box_->periodic_[0]||run.box_->periodic_[1]||run.box_->periodic_[2]) {
-            p.checkBoundary();
-        }
-    }
+    // for (Polygon& p:run.polygons_) {
+    //     if (run.box_->periodic_[0]||run.box_->periodic_[1]||run.box_->periodic_[2]) {
+    //         p.checkBoundary();
+    //     }
+    // }
     wrt.append("# vtk DataFile Version 3.0\npolydata\nASCII\nDATASET POLYDATA\n");
     wrt.append("POINTS " + to_string(run.vertices_.size())+" double\n");
     for(Vertex& v: run.vertices_){
@@ -35,7 +35,7 @@ void dumpVtk(Run& run){
     for(Cell& c:run.cells_){//discarding any cross boundary polygon for better visualization.
         //p_num+=static_cast<int>(c.polygons_.size());
         for(auto&[o, p]:c.polygons_){
-            if (!p->crossBoundary_) {
+            if (!p->checkBoundary()) {
                 p_num +=1;
                 wrt.append(to_string(p->vertices_.size())+" ");
                 for(Vertex* v:p->vertices_){
@@ -55,7 +55,7 @@ void dumpVtk(Run& run){
 
 int main()
 {
-    long MAX_ITER = 100000;
+    long MAX_ITER = 9000;
     int SAVE_ITER = 50;
     map<array<double,3>,array<bool,3>> boxMap = loadBox("../conf");
     auto it = boxMap.begin();
@@ -81,7 +81,7 @@ int main()
     dumpVtk(container);
     container.updateCell();
     container.updateEdges();
-    while (container.ITERS_<MAX_ITER) {
+    while (container.ITERS_<=MAX_ITER) {
         container.computeForce();
         container.updateEnergy();
         container.getVertexVelocity();

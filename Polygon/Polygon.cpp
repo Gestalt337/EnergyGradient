@@ -32,7 +32,7 @@ int Polygon::addBox(Box *box) {
     return 0;
 }
 
-int Polygon::checkBoundary() {
+bool Polygon::checkBoundary() {
     // int np = static_cast<int>(vertices_.size());
     // for (int i=0; i<np;++i) {
     //     // double dx = fabs(vertices_[i]->pos_[0]-vertices_[(i+1)%np]->pos_[0]);
@@ -44,9 +44,9 @@ int Polygon::checkBoundary() {
     // }
     for (cedge& polyedges:edges_) {
         if (polyedges.e->crossBoundary()) {
-            crossBoundary_ = true;
+            return true;
             break;
         }
     }
-    return 0;
+    return false;
 }

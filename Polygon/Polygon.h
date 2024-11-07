@@ -26,14 +26,14 @@ public:
     const int id_;
     array<double, 3> center_{};
     vector<int> cellIds_={};
-    bool crossBoundary_=false;
+    //bool crossBoundary_=false;
     Box* box_{};
 
     Polygon(const int id, vector<Vertex*> vertices): vertices_(move(vertices)), id_(id) {}
 
     int addBox(Box*);
     int getCenter();
-    int checkBoundary();
+    bool checkBoundary();
     Vertex* getVertexPtr(int);
 };
 

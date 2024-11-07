@@ -134,7 +134,7 @@ int Run::updateCell() {
             if (vertex.pos_[m]>box_->boxSize_[m] && box_->periodic_[m]) {
                 vertex.pos_[m] -= box_->boxSize_[m];
             }
-            else if (vertex.pos_[m]<0 && box_->periodic_[m]) {
+            else if (vertex.pos_[m]<=0 && box_->periodic_[m]) {
                 vertex.pos_[m] += box_->boxSize_[m];
             }
         }

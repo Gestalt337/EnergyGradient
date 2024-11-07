@@ -84,7 +84,6 @@ int Cell::getArea() {
         }
     }
     area_ = A * 0.5;
-    //return area_tot_;
     return 0;
 }
 

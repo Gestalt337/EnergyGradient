@@ -42,10 +42,11 @@ bool Polygon::checkBoundary() {
     //         crossBoundary_ = true;
     //     }
     // }
-    for (cedge& polyedges:edges_) {
-        if (polyedges.e->crossBoundary()) {
-            return true;
-            break;
+    if (box_->periodic_[0]||box_->periodic_[1]||box_->periodic_[2]) {
+        for (cedge& polyedges:edges_) {
+            if (polyedges.e->crossBoundary()) {
+                return true;
+            }
         }
     }
     return false;

@@ -31,19 +31,17 @@ void dumpVtk(Run& run){
     wrt.append("\n");
     string to_find = "PLACEHOLDER";
     wrt.append(to_find);
-    //s+="POLYGONS "+to_string(p_num)+" "+to_string(p_num+v_num)+"\n";
-    for(Cell& c:run.cells_){//discarding any cross boundary polygon for better visualization.
+    //s+="POLYGONS "+to_string(p_num)+" "+to_string(p_num+v_num)+"\n";//discarding any cross boundary polygon for better visualization.
         //p_num+=static_cast<int>(c.polygons_.size());
-        for(auto&[o, p]:c.polygons_){
-            if (!p->checkBoundary()) {
-                p_num +=1;
-                wrt.append(to_string(p->vertices_.size())+" ");
-                for(Vertex* v:p->vertices_){
-                    wrt.append(to_string(v->id_)+" ");
-                    v_num+=1;
-                }
-                wrt.append("\n");
+    for(Polygon& p:run.polygons_){
+        if (!p.checkBoundary()) {
+            p_num +=1;
+            wrt.append(to_string(p.vertices_.size())+" ");
+            for(Vertex* v:p.vertices_){
+                wrt.append(to_string(v->id_)+" ");
+                v_num+=1;
             }
+            wrt.append("\n");
         }
     }
     size_t pos = wrt.find(to_find);
@@ -55,8 +53,8 @@ void dumpVtk(Run& run){
 
 int main()
 {
-    long MAX_ITER = 9000;
-    int SAVE_ITER = 50;
+    long MAX_ITER = 6000;
+    int SAVE_ITER = 60;
     map<array<double,3>,array<bool,3>> boxMap = loadBox("../conf");
     auto it = boxMap.begin();
     Box simBox(it->first,it->second);

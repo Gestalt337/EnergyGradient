@@ -51,10 +51,10 @@ void dumpVtk(Run& run){
     outFile.close();
 }
 
-int main()
+int main()//Note: For this configuration, z-force on monolayer is set to 0.
 {
-    long MAX_ITER = 6000;
-    int SAVE_ITER = 60;
+    long MAX_ITER = 100000;
+    int SAVE_ITER = 200;
     map<array<double,3>,array<bool,3>> boxMap = loadBox("../conf");
     auto it = boxMap.begin();
     Box simBox(it->first,it->second);
@@ -71,6 +71,20 @@ int main()
     container.updateEnergy();
     container.getVertexVelocity();
 
+    ofstream volumeFile("data/output/volume.txt");
+    ofstream areaFile("data/output/area.txt");
+    ofstream forceFile("data/output/force.txt");
+    volumeFile<<"ITER "+to_string(container.ITERS_)<<endl;
+    areaFile<<"ITER "+to_string(container.ITERS_)<<endl;
+    forceFile<<"ITER "+to_string(container.ITERS_)<<endl;
+    for (Vertex vertex:container.vertices_){
+        forceFile<<vertex.id_<<" "<<sqrt(pow(vertex.force_[0],2)+pow(vertex.force_[1],2)+pow(vertex.force_[2],2))<<endl;
+    }
+    for (auto & cell : container.cells_){
+        volumeFile<<"Cell"+to_string(cell.id_)+" "+to_string(cell.volume_)<<endl;
+        areaFile<<"Cell"+to_string(cell.id_)+" "+to_string(cell.area_)<<endl;
+    }
+
     filesystem::remove_all("../data/output/vtk/");
     filesystem::create_directories("../data/output/vtk/");
     cout<<">>>>>>Simulation Starts>>>>>>"<<endl;
@@ -86,11 +100,24 @@ int main()
         if (container.ITERS_%SAVE_ITER==0) {
             cout<<"ITER "<<container.ITERS_<<endl;
             cout<< "Current Energy "<<container.energy_<<endl;
+            volumeFile<<"ITER "+to_string(container.ITERS_)<<endl;
+            areaFile<<"ITER "+to_string(container.ITERS_)<<endl;
+            forceFile<<"ITER "+to_string(container.ITERS_)<<endl;
+            for (Vertex vertex:container.vertices_){
+                forceFile<<vertex.id_<<" "<<sqrt(pow(vertex.force_[0],2)+pow(vertex.force_[1],2)+pow(vertex.force_[2],2))<<endl;
+            }
+            for (auto & cell : container.cells_){
+                volumeFile<<"Cell"+to_string(cell.id_)+" "+to_string(cell.volume_)<<endl;
+                areaFile<<"Cell"+to_string(cell.id_)+" "+to_string(cell.area_)<<endl;
+            }
             dumpVtk(container);
         }
         container.updateCell();
         container.updateEdges();
     }
+    volumeFile.close();
+    areaFile.close();
+    forceFile.close();
 
     return 0;
 }

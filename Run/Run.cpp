@@ -87,7 +87,7 @@ int Run::computeForce(){
             }
             vtx->force_[0] +=-T*dadx*0.5-P*dvdx*1./6;
             vtx->force_[1] +=-T*dady*0.5-P*dvdy*1./6;
-            vtx->force_[2] +=-T*dadz*0.5-P*dvdz*1./6;
+            //vtx->force_[2] +=-T*dadz*0.5-P*dvdz*1./6;
         }
     }
     return 0;
@@ -123,6 +123,24 @@ int Run::getVertexVelocity() {
             vertex.velocity_[m] = vertex.velocity_[m] - average_velo[m];
         }
     }
+    // remove drift angular velocity about z
+    // double L = 0.;
+    // double I = 0;
+    // vector<double> rxs = {};
+    // vector<double> rys = {};
+    // for (Vertex& vertex : vertices_) {
+    //     const double rx = box_->resetDistance(vertex.pos_[0]-box_->boxSize_[0]*0.5,0);
+    //     const double ry = box_->resetDistance(vertex.pos_[1]-box_->boxSize_[1]*0.5,1);
+    //     rxs.push_back(rx);
+    //     rys.push_back(ry);
+    //     L += rx*vertex.velocity_[1]-ry*vertex.velocity_[0];
+    //     I += pow(rx,2)+pow(ry,2);
+    // }
+    // const double omega = L/I;
+    // for (int i=0; i<vertices_.size(); ++i) {
+    //     vertices_[i].velocity_[0] -= omega*rys[i];
+    //     vertices_[i].velocity_[1] += omega*rxs[i];
+    // }
     return 0;
 }
 

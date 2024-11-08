@@ -71,9 +71,9 @@ int main()//Note: For this configuration, z-force on monolayer is set to 0.
     container.updateEnergy();
     container.getVertexVelocity();
 
-    ofstream volumeFile("data/output/volume.txt");
-    ofstream areaFile("data/output/area.txt");
-    ofstream forceFile("data/output/force.txt");
+    ofstream volumeFile("../data/output/volume.txt");
+    ofstream areaFile("../data/output/area.txt");
+    ofstream forceFile("../data/output/force.txt");
     volumeFile<<"ITER "+to_string(container.ITERS_)<<endl;
     areaFile<<"ITER "+to_string(container.ITERS_)<<endl;
     forceFile<<"ITER "+to_string(container.ITERS_)<<endl;
